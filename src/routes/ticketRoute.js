@@ -1,5 +1,11 @@
 // imports
 const express = require("express");
+const {
+    submitTicket,
+    getTicketByStatus,
+    getTicketByEmployeeId,
+    updateTicketStatus
+} = require("../controllers/ticketController");
 
 // creating instance of Router class
 const router = express.Router();
@@ -8,10 +14,10 @@ const router = express.Router();
 router.post("/submit", submitTicket);
 
 // route to get tickets based on a given status in the url param
-router.get("/staus/:status", getTicketsWithStatus);
+router.get("/staus/:status", getTicketByStatus);
 
 // route to handle seeing an employee's ticket history, will get employee_id with jwt-tokens
-router.get("/:employee_id", getTicketsByEmployee);
+router.get("/:employee_id", getTicketByEmployeeId);
 
 // route to handle the changing of a ticket status
 router.patch("/:ticket_id/status", updateTicketStatus);

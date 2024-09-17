@@ -1,5 +1,8 @@
 // imports
 const express = require("express");
+const {
+    registerAccount,
+    login } = require("../controllers/authenticationController");
 
 // creating instance of Router class
 router = express.Router();
