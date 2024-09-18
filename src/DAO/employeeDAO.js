@@ -1,3 +1,4 @@
+const { NIL } = require("uuid");
 const { documentClient } = require("../db/dynamoClient");
 const { QueryCommand, PutCommand } = require("@aws-sdk/lib-dynamodb");
 
@@ -7,8 +8,12 @@ require('dotenv').config({ path: "../.env" });
 const TABLE_NAME = process.env.TABLE_NAME_EMPLOYEE;
 
 async function getEmployeeByUsername(username) {
+    /**
+     * function to get an employee by username from db
+     */
 
     try {
+        // params to get from global secondary index table on username attribute
         const params = {
             TableName: TABLE_NAME,
             IndexName: 'username-index',
@@ -18,8 +23,15 @@ async function getEmployeeByUsername(username) {
             }
         }
 
-        const { Items } = await documentClient.send(new QueryCommand(params));
-        return Items.length > 0 ? Items[0] : {};
+        // getting the data returned from the query command
+        const data = await documentClient.send(new QueryCommand(params));
+
+        // block to return null if data is empty
+        if (!data.Items || data.Items.length == 0) {
+            return null;
+        }
+
+        return data.Items[0];
 
     } catch (error) {
         console.log(`something went wrong with the getEmployeeByUsername(): ${error}`);
@@ -28,8 +40,12 @@ async function getEmployeeByUsername(username) {
 }
 
 async function createEmployee(employeeObject) {
+    /**
+     * function to persist an employee on the db
+     */
 
     try {
+        // params for the object that will be persisted
         const params = {
             TableName: TABLE_NAME,
             Item: {
@@ -40,7 +56,10 @@ async function createEmployee(employeeObject) {
             }
         };
 
+        // performing the persistance call
         const response = await documentClient.send(new PutCommand(params));
+
+        // will always return something no matter what
         return response;
     } catch (error) {
         console.log(`something went wrong with createEmployee`);

@@ -3,9 +3,7 @@ const service = require("../services/authenticationService");
 
 async function registerAccount(req, res) {
     /**
-     * 
-     * registers new employee if employee account does not already exist
-     * 
+     * function to register an account, checks to see if username already exist beforehand
      */
 
     try {
@@ -13,13 +11,13 @@ async function registerAccount(req, res) {
         const { username, password, role = "employee" } = req.body;
 
         // using service layer function to retrieve an employee based on the username provided in the body
-        const employeeTemp = await service.getEmployeeByUsername(username);
+        const returnedEmployee = await service.getEmployeeByUsername(username);
 
-        // block of code compares the objects, if object is empty then create a new employee, else return a 409 status code and error message
-        if (JSON.stringify(employeeTemp) === JSON.stringify({})) {
-            const responseObject = await service.createEmployee(username, password, role);
+        // block of checks to see if user exists, if not then create the user
+        if (returnedEmployee === null) {
+            const response = await service.createEmployee(username, password, role);
 
-            if (JSON.stringify(responseObject) !== JSON.stringify({})) {
+            if (response !== null || JSON.stringify(response).length !== 0) {
                 return res.status(201).json({ message: "Account created!" })
             } else {
                 return res.status(500).json({ message: "Account creation failed!" })
@@ -36,9 +34,7 @@ async function registerAccount(req, res) {
 
 async function login(req, res) {
     /**
-     * 
-     * function to handle the logging in of an employee
-     * 
+     * function to handle to handle log in of employee, checks if account exists and makes sure that passwords match
      */
 
     try {
@@ -46,14 +42,16 @@ async function login(req, res) {
         const { username, password } = req.body;
 
         // service layer function call to check if the password in the body matches the password associated with the username
-        const employeeTemp = await service.checkPassword(username, password);
+        const returnedEmployee = await service.checkPassword(username, password);
 
-        // if the function call returns an empty object then return 401 status code, else return 200 code and log in
-        if (JSON.stringify(employeeTemp) === JSON.stringify({})) {
-            return res.status(401).json({ message: "something went wrong, please try again." });
-        } else {
-            return res.status(200).json({ message: "logged in succssful!" });
+        // checks to see if returnedEmployee is null
+        if (returnedEmployee === null) {
+            return res.status(401).json({ message: "Account does not exists." });
         }
+
+        // else
+        return res.status(returnedEmployee.httpStatus).json({ message: returnedEmployee.message });
+
     } catch (error) {
         console.log(`something went wrong with login(): ${error}`)
         res.status(500).json({ message: "Internal server error" });
