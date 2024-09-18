@@ -67,7 +67,7 @@ async function createEmployee(username, password, role) {
         };
 
         // persisting the new user
-        const savedEmployee = await employeeDAO.createUser(newEmployee);
+        const savedEmployee = await employeeDAO.createEmployee(newEmployee);
 
         // block checks to see if the object was persisted properly, otherwise throws and error
         if (JSON.stringify(savedEmployee) === JSON.stringify({})) {
