@@ -9,20 +9,27 @@ async function registerAccount(req, res) {
      */
 
     try {
-        const { username, password } = req.body;
+        // destructing the body of the request, setting role to employee by default if not provided
+        const { username, password, role = "employee" } = req.body;
 
         // using service layer function to retrieve an employee based on the username provided in the body
         const employeeTemp = await service.getEmployeeByUsername(username);
 
         // block of code compares the objects, if object is empty then create a new employee, else return a 409 status code and error message
         if (JSON.stringify(employeeTemp) === JSON.stringify({})) {
-            service.createEmployee(username, password);
-            return res.status(201).json({ message: "Account created!" })
+            const responseObject = await service.createEmployee(username, password, role);
+
+            if (JSON.stringify(responseObject) !== JSON.stringify({})) {
+                return res.status(201).json({ message: "Account created!" })
+            } else {
+                return res.status(500).json({ message: "Account creation failed!" })
+            }
         } else {
             return res.status(409).json({ message: "Account with username already exists!" });
         }
     } catch (error) {
-        console.log(`Something went wrong with the registerAccount(): ${error}`)
+        console.log(`something went wrong with the registerAccount(): ${error}`)
+        res.status(500).json({ message: "Internal server error" });
     }
 
 }
@@ -48,7 +55,8 @@ async function login(req, res) {
             return res.status(200).json({ message: "logged in succssful!" });
         }
     } catch (error) {
-        console.log(`Something went wrong with login(): ${error}`)
+        console.log(`something went wrong with login(): ${error}`)
+        res.status(500).json({ message: "Internal server error" });
     }
 }
 
