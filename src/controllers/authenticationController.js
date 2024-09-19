@@ -17,7 +17,7 @@ async function registerAccount(req, res) {
         if (returnedEmployee === null) {
             const response = await service.createEmployee(username, password, role);
 
-            if (response !== null || JSON.stringify(response).length !== 0) {
+            if (response !== null && JSON.stringify(response).length !== 0) {
                 return res.status(201).json({ message: "Account created!" })
             } else {
                 return res.status(500).json({ message: "Account creation failed!" })

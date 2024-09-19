@@ -1,4 +1,4 @@
-function validateAuthenticationBodyParams(req, res) {
+function validateAuthenticationBodyParams(req, res, next) {
     /**
      * middleware function to handle missing fields for the body in the register/login routes
      */
@@ -11,11 +11,13 @@ function validateAuthenticationBodyParams(req, res) {
         message = "username and password are required!";
     } else if (!username) {
         message = "username is required!";
-    } else {
+    } else if (!password) {
         message = "password is required!";
+    } else {
+        next();
     }
 
-    return res.status(400).json({ message: message});
+    return res.status(400).json({ message: message });
 }
 
 module.exports = { validateAuthenticationBodyParams };

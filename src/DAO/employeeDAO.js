@@ -1,4 +1,3 @@
-const { NIL } = require("uuid");
 const { documentClient } = require("../db/dynamoClient");
 const { QueryCommand, PutCommand } = require("@aws-sdk/lib-dynamodb");
 
