@@ -7,17 +7,19 @@ function validateAuthenticationBodyParams(req, res, next) {
     let message = "";
 
     // block to check if both fields are missing
-    if (!username && !password) {
-        message = "username and password are required!";
-    } else if (!username) {
-        message = "username is required!";
-    } else if (!password) {
-        message = "password is required!";
+
+    if (!username || !password) {
+        if (!username && !password) {
+            message = "username and password are required!";
+        } else if (!username) {
+            message = "username is required!";
+        } else {
+            message = "password is required!";
+        }
+        return res.status(400).json({ message: message });
     } else {
         next();
     }
-
-    return res.status(400).json({ message: message });
 }
 
 module.exports = { validateAuthenticationBodyParams };
