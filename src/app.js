@@ -2,6 +2,7 @@
 const express = require("express");
 const authenticationRoutes = require("./routes/authenticationRoute");
 const ticketRoutes = require("./routes/ticketRoute");
+const { logger } = require("./utils/logger");
 
 // getting environment variables
 require('dotenv').config({ path: "../.env" });
@@ -16,5 +17,5 @@ app.use("/tickets", ticketRoutes);
 
 
 app.listen(process.env.PORT, () => {
-    console.log(`listening on port: ${process.env.PORT}`)
+    logger.info(`Server is running on port: ${process.env.PORT}`);
 })

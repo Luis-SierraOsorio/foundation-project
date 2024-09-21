@@ -1,5 +1,6 @@
 const { documentClient } = require("../db/dynamoClient");
 const { QueryCommand, PutCommand } = require("@aws-sdk/lib-dynamodb");
+const { logger } = require("../utils/logger");
 
 
 require('dotenv').config({ path: "../.env" });
@@ -26,15 +27,15 @@ async function getEmployeeByUsername(username) {
         const data = await documentClient.send(new QueryCommand(params));
 
         // block to return null if data is empty
-        if (!data.Items || data.Items.length == 0) {
+        if (!data.Items || data.Items.length === 0) {
             return null;
         }
 
         return data.Items[0];
 
     } catch (error) {
-        console.log(`something went wrong with the getEmployeeByUsername(): ${error}`);
-        throw new Error("something went wrong");
+        logger.error(`Error retrieving employee by username: ${username}`, error);
+        throw new Error(`Database query failed for username: ${username}. Ensure the index exists and the connection is valid.`);
     }
 }
 
@@ -61,8 +62,8 @@ async function createEmployee(employeeObject) {
         // will always return something no matter what
         return response;
     } catch (error) {
-        console.log(`something went wrong with createEmployee`);
-        throw new Error("something went wrong");
+        logger.error(`Error creating employee with username: ${employeeObject.username}`, error);
+        throw new Error(`Failed to persist employee data for username: ${employeeObject.username}. Check table permissions or structure.`);
     }
 }
 

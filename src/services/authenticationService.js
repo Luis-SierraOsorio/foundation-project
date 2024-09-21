@@ -1,6 +1,7 @@
 // connecting to the DAO layer
 const employeeDAO = require("../repositories/employeeDAO");
 const { v4: uuidv4 } = require("uuid");
+const { logger } = require("../utils/logger");
 
 async function getEmployeeByUsername(username) {
     /**
@@ -18,8 +19,8 @@ async function getEmployeeByUsername(username) {
         return returnedEmployee;
 
     } catch (error) {
-        console.log(`something went wrong with getEmployeeByUsername(): ${error}`);
-        throw new Error("something went wrong with getting employee by username");
+        logger.error(`Error retrieving employee by username: ${username}`, error);
+        throw new Error(`Failed to retrieve employee data for username: ${username}`);
     }
 }
 
@@ -55,8 +56,8 @@ async function checkPassword(username, passwordCheck) {
 
 
     } catch (error) {
-        console.log(`something went wrong wtih checkPassword(): ${error}`);
-        throw new Error("something went wrong with checking the password")
+        logger.error(`Error checking password for username: ${username}`, error);
+        throw new Error(`Password check failed for username: ${username}`);
     }
 }
 
@@ -78,15 +79,16 @@ async function createEmployee(username, password, role) {
         const savedEmployee = await employeeDAO.createEmployee(newEmployee);
 
         // block checks that savedEmployee is not null or empty
-        if (savedEmployee === null || JSON.stringify(savedEmployee).length === 0) {
-            throw new Error("something went wrong with the creation of the object");
-        }
+        // this should not matter, if repository should throw an error and get caught in our catch block here
+        // if (savedEmployee === null || JSON.stringify(savedEmployee).length === 0) {
+        //     throw new Error("something went wrong with the creation of the object");
+        // }
 
         return savedEmployee;
 
     } catch (error) {
-        console.log(`something went wrong with createEmployee(): ${error}`)
-        throw new Error("something went wrong with the creation of the new account");
+        logger.error(`Error creating employee for data: ${newEmployee} `, error);
+        throw new Error(`Failed to create a new account for username: ${username}. Check database connection or input data.`);
     }
 
 }

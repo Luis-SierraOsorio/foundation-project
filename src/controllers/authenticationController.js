@@ -1,5 +1,6 @@
 // importing the service layer
 const service = require("../services/authenticationService");
+const { logger } = require("../utils/logger");
 
 async function registerAccount(req, res) {
     /**
@@ -18,16 +19,17 @@ async function registerAccount(req, res) {
             const response = await service.createEmployee(username, password, role);
 
             if (response !== null && JSON.stringify(response).length !== 0) {
-                return res.status(201).json({ message: "Account created!" })
+                return res.status(201).json({ message: "Account created!" });
             } else {
-                return res.status(500).json({ message: "Account creation failed!" })
+                return res.status(500).json({ message: "Account creation failed!" });
             }
         } else {
+
             return res.status(409).json({ message: "Account with username already exists!" });
         }
     } catch (error) {
-        console.log(`something went wrong with the registerAccount(): ${error}`)
-        res.status(500).json({ message: "Internal server error" });
+        logger.error(`Error in registerAccount() for username: ${req.body.username}`, error)
+        res.status(500).json({ message: "Internal server error during registering" });
     }
 
 }
@@ -53,8 +55,8 @@ async function login(req, res) {
         return res.status(returnedEmployee.httpStatus).json({ message: returnedEmployee.message });
 
     } catch (error) {
-        console.log(`something went wrong with login(): ${error}`)
-        res.status(500).json({ message: "Internal server error" });
+        logger.error(`Error in login() for username: ${req.body.username}`, error);
+        res.status(500).json({ message: "Internal server error during login" });
     }
 }
 
