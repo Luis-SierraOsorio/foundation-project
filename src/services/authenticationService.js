@@ -1,5 +1,5 @@
 // connecting to the DAO layer
-const employeeDAO = require("../DAO/employeeDAO");
+const employeeDAO = require("../repositories/employeeDAO");
 const { v4: uuidv4 } = require("uuid");
 
 async function getEmployeeByUsername(username) {
