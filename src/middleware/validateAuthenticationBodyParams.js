@@ -4,11 +4,11 @@ function validateAuthenticationBodyParams(req, res, next) {
      */
 
     const { username, password } = req.body;
-    let message = "";
 
-    // block to check if both fields are missing
-
+    // block to check if both fields are missing, if not then continue
     if (!username || !password) {
+        let message = "";
+        // block of code checks which fields are missing
         if (!username && !password) {
             message = "username and password are required!";
         } else if (!username) {

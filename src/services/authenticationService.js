@@ -13,6 +13,7 @@ async function getEmployeeByUsername(username) {
      */
 
     try {
+        // calling repository to get employee by username
         const returnedEmployee = await employeeDAO.getEmployeeByUsername(username);
 
         // block of code to check if returnedEmployee exist or not
@@ -50,6 +51,7 @@ async function login(username, passwordCheck) {
             return {}
         } else {
 
+            // creating jwt to send back to client
             const token = jwt.sign({
                 username: returnedEmployee.username,
                 role: returnedEmployee.role,
@@ -86,12 +88,7 @@ async function createEmployee(username, password, role) {
         // persisting the new user
         const savedEmployee = await employeeDAO.createEmployee(newEmployee);
 
-        // block checks that savedEmployee is not null or empty
-        // this should not matter, if repository should throw an error and get caught in our catch block here
-        // if (savedEmployee === null || JSON.stringify(savedEmployee).length === 0) {
-        //     throw new Error("something went wrong with the creation of the object");
-        // }
-
+        // return response
         return savedEmployee;
 
     } catch (error) {
