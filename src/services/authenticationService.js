@@ -58,7 +58,7 @@ async function login(username, passwordCheck) {
                 employeeId: returnedEmployee.employee_id
             },
                 process.env.MY_SECRET, {
-                expiresIn: '1h'
+                expiresIn: '3d'
             });
 
             return { token };
