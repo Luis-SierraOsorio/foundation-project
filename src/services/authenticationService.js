@@ -2,6 +2,10 @@
 const employeeDAO = require("../repositories/employeeDAO");
 const { v4: uuidv4 } = require("uuid");
 const { logger } = require("../utils/logger");
+const jwt = require("jsonwebtoken");
+
+// access to my environment file
+require('dotenv').config({ path: "../.env" });
 
 async function getEmployeeByUsername(username) {
     /**
@@ -24,7 +28,7 @@ async function getEmployeeByUsername(username) {
     }
 }
 
-async function checkPassword(username, passwordCheck) {
+async function login(username, passwordCheck) {
     /**
      * function to check the password of the user
      */
@@ -40,18 +44,22 @@ async function checkPassword(username, passwordCheck) {
 
         const { password } = returnedEmployee;
 
-        // block of code to check if passwords match
+        // block of code to check if passwords match, if they do create and return jwt
         if (password !== passwordCheck) {
-            return {
-                message: "Incorrect passsword",
-                httpStatus: 401
-            };
+            // returning empty object, means that the passwords do not match
+            return {}
         } else {
 
-            return {
-                message: "Correct password",
-                httpStatus: 202
-            };
+            const token = jwt.sign({
+                username: returnedEmployee.username,
+                role: returnedEmployee.role,
+                employeeId: returnedEmployee.employeeId
+            },
+                process.env.MY_SECRET, {
+                expiresIn: '1h'
+            });
+
+            return { token };
         }
 
 
@@ -69,7 +77,7 @@ async function createEmployee(username, password, role) {
     try {
         // new employee object to be passed into the DAO
         let newEmployee = {
-            employee_id: uuidv4(),
+            employeeId: uuidv4(),
             username: username,
             password: password,
             role: role
@@ -95,6 +103,6 @@ async function createEmployee(username, password, role) {
 
 module.exports = {
     getEmployeeByUsername,
-    checkPassword,
+    login,
     createEmployee
 }

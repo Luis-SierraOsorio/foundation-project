@@ -49,7 +49,7 @@ async function createEmployee(employeeObject) {
         const params = {
             TableName: TABLE_NAME,
             Item: {
-                employee_id: employeeObject.employee_id,
+                employee_id: employeeObject.employeeId,
                 username: employeeObject.username,
                 password: employeeObject.password,
                 role: employeeObject.role

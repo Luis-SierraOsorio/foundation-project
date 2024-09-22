@@ -44,15 +44,19 @@ async function login(req, res) {
         const { username, password } = req.body;
 
         // service layer function call to check if the password in the body matches the password associated with the username
-        const returnedEmployee = await service.checkPassword(username, password);
+        const returnedEmployee = await service.login(username, password);
 
-        // checks to see if returnedEmployee is null
+        // block of code checks to see if employee exist, passwords match, login if everything is right
         if (returnedEmployee === null) {
-            return res.status(401).json({ message: "Account does not exists." });
+            // account does not exist
+            return res.status(401).json({ message: "Account does not exists" });
+        } else if (Object.keys(returnedEmployee).length === 0) {
+            // incorrect password
+            return res.status(401).json({ message: "Wrong password" });
+        } else {
+            // login
+            return res.status(200).json(returnedEmployee);
         }
-
-        // else
-        return res.status(returnedEmployee.httpStatus).json({ message: returnedEmployee.message });
 
     } catch (error) {
         logger.error(`Error in login() for username: ${req.body.username}`, error);
