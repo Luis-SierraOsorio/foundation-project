@@ -18,7 +18,6 @@ function validateJWTAccess(req, res, next) {
     try {
         let decodedToken = jwt.verify(token, process.env.MY_SECRET);
         // assign user to the req from the decoded token
-        console.log(decodedToken);
         req.user = decodedToken;
         next();
     } catch (error) {

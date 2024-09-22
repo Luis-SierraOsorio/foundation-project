@@ -4,12 +4,12 @@ function validateTicketsBodyParams(req, res, next) {
     const { amount, description } = req.body;
 
     // block of code checks if either required fields are missing and returns appropiate response
-    if (!amount || !description) {
+    if (!amount || !description || +amount <= 0) {
         let message = "";
 
         if (!amount && !description) {
             message = `Amount and description are required`;
-        } else if (!amount) {
+        } else if (!amount || +amount <= 0) {
             message = `Amount is required`;
         } else {
             message = `Description is required`
