@@ -3,6 +3,9 @@ const { QueryCommand, PutCommand } = require("@aws-sdk/lib-dynamodb");
 const { logger } = require("../utils/logger");
 
 async function submitTicket(data) {
+    /**
+     * function to persist ticket to db
+     */
 
     try {
         // constructing params to pass into putcommand for dynamodb
@@ -28,4 +31,37 @@ async function submitTicket(data) {
     }
 }
 
-module.exports = { submitTicket };
+async function getTicketsByStatus(status) {
+    /**
+     * function to query db for tickets by status
+     */
+
+    try {
+
+        // params for the 
+        const params = {
+            TableName: process.env.TABLE_NAME_TICKET,
+            IndexName: 'status-index',
+            KeyConditionExpression: "#status = :status",
+            ExpressionAttributeNames: {
+                "#status": "status"
+            },
+            ExpressionAttributeValues: {
+                ":status": status
+            }
+        }
+
+        const data = await documentClient.send(new QueryCommand(params));
+
+        return data.Items;
+
+    } catch (error) {
+        logger.error(`Failed to retrieve ticket of status ${status} from database`, error);
+        throw new Error(`Failed to retrieve ticket of status ${status} from database`);
+    }
+}
+
+module.exports = {
+    submitTicket,
+    getTicketsByStatus
+}

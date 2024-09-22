@@ -1,5 +1,5 @@
-// importing service layer
-const service = require("../services/ticketService");
+// importing ticketService layer
+const ticketService = require("../services/ticketService");
 const { logger } = require("../utils/logger");
 
 async function submitTicket(req, res) {
@@ -11,8 +11,8 @@ async function submitTicket(req, res) {
         const { employeeId } = req.user;
         const { amount, description, status = "pending" } = req.body;
 
-        // calling service layer function for submitting ticket
-        const response = await service.submitTicket(employeeId, amount, description, status);
+        // calling ticketService layer function for submitting ticket
+        const response = await ticketService.submitTicket(employeeId, amount, description, status);
 
         // block of code checks response to see if ticket was persisted to db
         if (response === null) {
@@ -27,12 +27,36 @@ async function submitTicket(req, res) {
     }
 }
 
-function getTicketByStatus(req, res) {
-    console.log("Received GET request to see ticket by status");
+async function getTicketsByStatus(req, res) {
+    /**
+     * function to be able to get ticket by status based on url param
+     */
+    try {
+        const { status } = req.params;
+        const { role } = req.user
 
+        // should return empty or at least 1 array
+        const response = await ticketService.getTicketsByStatus(status, role);
+
+        // response is null meaning user is not a manager
+        if (!response) {
+            return res.status(401).json({ message: `Only managers can view ${status} tickets` });
+        }
+
+        // block to check for empty array or null status
+        if (response.length < 1) {
+            return res.status(404).json({ message: `Sorry no tickets with the status: ${status.toUpperCase()} were found` });
+        }
+
+        // returning data found
+        return res.status(200).json({ response });
+    } catch (error) {
+        logger.error(`Error at getTicketsByStatus() for status: ${req.params.status}`, error);
+        throw new Error(`Error at getTicketsByStatus() for status: ${req.params.status}`);
+    }
 }
 
-function getTicketByEmployeeId(req, res) {
+function getTicketsByEmployeeId(req, res) {
     console.log("Received GET request to see tickets by employee id");
 
 }
@@ -42,9 +66,10 @@ function updateTicketStatus(req, res) {
 
 }
 
+
 module.exports = {
-    submitTicket,
-    getTicketByEmployeeId,
-    getTicketByStatus,
-    updateTicketStatus
-};
+    updateTicketStatus,
+    getTicketsByEmployeeId,
+    getTicketsByStatus,
+    submitTicket
+}

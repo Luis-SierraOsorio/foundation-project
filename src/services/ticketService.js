@@ -37,5 +37,36 @@ async function submitTicket(employeeId, amount, description, status) {
 
 }
 
+async function getTicketsByStatus(status, role) {
 
-module.exports = { submitTicket };
+    try {
+        // some string sanitization
+        status = status.toLowerCase().trim();
+
+        if (role !== "manager") {
+            return null;
+        }
+
+        // set to hold possible statuses
+        const statuses = new Set(["pending", "approved", "denied"]);
+
+        // checking if given status is within our possible statuses
+        if (!statuses.has(status)) {
+            return [];
+        }
+
+        // repsonse is an array, either null, empty or contains items
+        const response = await ticketDAO.getTicketsByStatus(status);
+
+        return response;
+    } catch (error) {
+        logger.error(`Failed retrieving tickets by status: ${status}`, error);
+        throw new Error(`Failed retrieving tickets by status ${status}`);
+    }
+
+}
+
+module.exports = {
+    submitTicket,
+    getTicketsByStatus
+}

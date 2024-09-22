@@ -1,11 +1,6 @@
 // imports
 const express = require("express");
-const {
-    submitTicket,
-    getTicketByStatus,
-    getTicketByEmployeeId,
-    updateTicketStatus
-} = require("../controllers/ticketController");
+const { submitTicket, getTicketsByEmployeeId, getTicketsByStatus, updateTicketStatus } = require("../controllers/ticketController");
 const { validateTicketsBodyParams } = require("../middleware/validateTicketsBodyParams");
 const { validateJWTAccess } = require("../middleware/validateJWTAccess");
 
@@ -16,10 +11,10 @@ const router = express.Router();
 router.post("/submit", validateTicketsBodyParams, validateJWTAccess, submitTicket);
 
 // route to get tickets based on a given status in the url param
-router.get("/staus/:status", getTicketByStatus);
+router.get("/status/:status", validateJWTAccess, getTicketsByStatus);
 
 // route to handle seeing an employee's ticket history, will get employee_id with jwt-tokens
-router.get("/:employee_id", getTicketByEmployeeId);
+router.get("/:employee_id", getTicketsByEmployeeId);
 
 // route to handle the changing of a ticket status
 router.patch("/:ticket_id/status", updateTicketStatus);
