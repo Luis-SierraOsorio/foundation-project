@@ -6,12 +6,14 @@ const {
     getTicketByEmployeeId,
     updateTicketStatus
 } = require("../controllers/ticketController");
+const { validateTicketsBodyParams } = require("../middleware/validateTicketsBodyParams");
+const { validateJWTAccess } = require("../middleware/validateJWTAccess");
 
 // creating instance of Router class
 const router = express.Router();
 
 // route to submit a new ticket, expects amount and description in the body
-router.post("/submit", submitTicket);
+router.post("/submit", validateTicketsBodyParams, validateJWTAccess, submitTicket);
 
 // route to get tickets based on a given status in the url param
 router.get("/staus/:status", getTicketByStatus);

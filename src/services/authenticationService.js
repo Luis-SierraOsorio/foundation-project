@@ -55,7 +55,7 @@ async function login(username, passwordCheck) {
             const token = jwt.sign({
                 username: returnedEmployee.username,
                 role: returnedEmployee.role,
-                employeeId: returnedEmployee.employeeId
+                employeeId: returnedEmployee.employee_id
             },
                 process.env.MY_SECRET, {
                 expiresIn: '1h'
