@@ -10,13 +10,13 @@ const router = express.Router();
 // route to submit a new ticket, expects amount and description in the body
 router.post("/submit", validateTicketsBodyParams, validateJWTAccess, submitTicket);
 
-// route to get tickets based on a given status in the url param
-router.get("/status/:status", validateJWTAccess, getTicketsByStatus);
+// route to get tickets based on a given status, expects uri filtering params
+router.get("/status", validateJWTAccess, getTicketsByStatus);
 
 // route to handle seeing an employee's ticket history, will get employee_id with jwt-tokens
 router.get("/my-tickets", validateJWTAccess, getTicketsByEmployeeId);
 
 // route to handle the changing of a ticket status
-router.patch("/:ticketId/status", validateJWTAccess, updateTicketStatus);
+router.patch("/:ticketId", validateJWTAccess, updateTicketStatus);
 
 module.exports = router;

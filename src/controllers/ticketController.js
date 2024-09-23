@@ -32,7 +32,7 @@ async function getTicketsByStatus(req, res) {
      * function to be able to get ticket by status based on url param
      */
     try {
-        const { status } = req.params;
+        const { status } = req.query;
         const { role } = req.user
 
         // should return empty or at least 1 array
