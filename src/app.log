@@ -30,3 +30,121 @@ ReferenceError: ticketService is not defined
 2024-09-23T02:20:00.797Z [INFO] Server is running on port: 3000
 2024-09-23T02:20:16.937Z [INFO] Server is running on port: 3000
 2024-09-23T02:20:22.029Z [INFO] Server is running on port: 3000
+2024-09-23T02:22:10.503Z [INFO] Server is running on port: 3000
+2024-09-23T02:26:46.855Z [INFO] Server is running on port: 3000
+2024-09-23T02:26:51.559Z [INFO] Server is running on port: 3000
+2024-09-23T02:49:25.677Z [INFO] Server is running on port: 3000
+2024-09-23T02:55:38.709Z [INFO] Server is running on port: 3000
+2024-09-23T02:55:42.298Z [ERROR] Error at updateTicketStatus() for employee manager1 Cannot set headers after they are sent to the client
+Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+    at ServerResponse.setHeader (node:_http_outgoing:652:11)
+    at ServerResponse.header (C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\express\lib\response.js:794:10)
+    at ServerResponse.send (C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\express\lib\response.js:174:12)
+    at ServerResponse.json (C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\express\lib\response.js:278:15)
+    at updateTicketStatus (C:\Users\luiss\OneDrive\Documents\foundation-project\src\controllers\ticketController.js:104:32)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2024-09-23T02:57:33.208Z [INFO] Server is running on port: 3000
+2024-09-23T02:57:34.983Z [ERROR] Error at updateTicketStatus() for employee manager1 employeeId is not defined
+ReferenceError: employeeId is not defined
+    at Object.updateTicketStatus (C:\Users\luiss\OneDrive\Documents\foundation-project\src\services\ticketService.js:98:72)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async updateTicketStatus (C:\Users\luiss\OneDrive\Documents\foundation-project\src\controllers\ticketController.js:95:26)
+2024-09-23T02:59:56.990Z [INFO] Server is running on port: 3000
+2024-09-23T03:00:04.353Z [INFO] Server is running on port: 3000
+2024-09-23T03:00:06.728Z [ERROR] Failed updating ticket status for ticket ID: de6469f2-6ae1-43d8-a885-0db18afdc34f employeeId is not defined
+ReferenceError: employeeId is not defined
+    at Object.updateTicketStatus (C:\Users\luiss\OneDrive\Documents\foundation-project\src\repositories\ticketDAO.js:108:63)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.updateTicketStatus (C:\Users\luiss\OneDrive\Documents\foundation-project\src\services\ticketService.js:93:26)
+    at async updateTicketStatus (C:\Users\luiss\OneDrive\Documents\foundation-project\src\controllers\ticketController.js:95:26)
+2024-09-23T03:00:48.668Z [INFO] Server is running on port: 3000
+2024-09-23T03:00:51.546Z [ERROR] Failed to update ticket of ticket ID: de6469f2-6ae1-43d8-a885-0db18afdc34f from database Invalid UpdateExpression: Attribute name is a reserved keyword; reserved keyword: status
+ValidationException: Invalid UpdateExpression: Attribute name is a reserved keyword; reserved keyword: status
+    at throwDefaultError (C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\@smithy\smithy-client\dist-cjs\index.js:859:20)
+    at C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\@smithy\smithy-client\dist-cjs\index.js:868:5
+    at de_CommandError (C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\@aws-sdk\client-dynamodb\dist-cjs\index.js:2230:14)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\@smithy\middleware-serde\dist-cjs\index.js:35:20
+    at async C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\@aws-sdk\lib-dynamodb\dist-cjs\index.js:164:30
+    at async C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\@smithy\core\dist-cjs\index.js:165:18
+    at async C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\@smithy\middleware-retry\dist-cjs\index.js:320:38
+    at async C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\@aws-sdk\middleware-logger\dist-cjs\index.js:34:22
+    at async Object.updateTicketStatus (C:\Users\luiss\OneDrive\Documents\foundation-project\src\repositories\ticketDAO.js:104:26)
+2024-09-23T03:01:10.267Z [INFO] Server is running on port: 3000
+2024-09-23T03:01:40.085Z [INFO] Server is running on port: 3000
+2024-09-23T03:01:47.610Z [INFO] Server is running on port: 3000
+2024-09-23T03:01:50.605Z [ERROR] Error at updateTicketStatus() for employee manager1 Cannot set headers after they are sent to the client
+Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+    at ServerResponse.setHeader (node:_http_outgoing:652:11)
+    at ServerResponse.header (C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\express\lib\response.js:794:10)
+    at ServerResponse.send (C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\express\lib\response.js:174:12)
+    at ServerResponse.json (C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\express\lib\response.js:278:15)
+    at updateTicketStatus (C:\Users\luiss\OneDrive\Documents\foundation-project\src\controllers\ticketController.js:104:32)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2024-09-23T03:02:56.106Z [INFO] Server is running on port: 3000
+2024-09-23T03:03:20.451Z [INFO] Server is running on port: 3000
+2024-09-23T03:03:21.652Z [INFO] Server is running on port: 3000
+2024-09-23T03:03:38.488Z [INFO] Server is running on port: 3000
+2024-09-23T03:06:00.275Z [INFO] Server is running on port: 3000
+2024-09-23T03:06:07.498Z [INFO] Server is running on port: 3000
+2024-09-23T03:06:13.514Z [INFO] Server is running on port: 3000
+2024-09-23T03:06:18.234Z [INFO] Server is running on port: 3000
+2024-09-23T03:06:56.588Z [INFO] Server is running on port: 3000
+2024-09-23T03:07:30.446Z [INFO] Server is running on port: 3000
+2024-09-23T03:07:49.786Z [INFO] Server is running on port: 3000
+2024-09-23T03:07:57.284Z [INFO] Server is running on port: 3000
+2024-09-23T03:08:07.812Z [INFO] Server is running on port: 3000
+2024-09-23T03:08:14.718Z [INFO] Server is running on port: 3000
+2024-09-23T03:08:33.539Z [INFO] Server is running on port: 3000
+2024-09-23T03:08:58.378Z [INFO] Server is running on port: 3000
+2024-09-23T03:09:03.857Z [INFO] Server is running on port: 3000
+2024-09-23T03:09:39.920Z [INFO] Server is running on port: 3000
+2024-09-23T03:09:44.240Z [INFO] Server is running on port: 3000
+2024-09-23T03:10:09.980Z [INFO] Server is running on port: 3000
+2024-09-23T03:10:25.353Z [INFO] Server is running on port: 3000
+2024-09-23T03:10:42.719Z [INFO] Server is running on port: 3000
+2024-09-23T03:10:43.860Z [INFO] Server is running on port: 3000
+2024-09-23T03:11:08.708Z [INFO] Server is running on port: 3000
+2024-09-23T03:11:18.467Z [INFO] Server is running on port: 3000
+2024-09-23T03:11:34.606Z [ERROR] Failed to get ticket of ticket ID: d9346d94-e50f-4d7f-a34c-a924e3ed6a43 from database ExpressionAttributeNames contains invalid key: Syntax error; key: "#=ticket_id"
+ValidationException: ExpressionAttributeNames contains invalid key: Syntax error; key: "#=ticket_id"
+    at throwDefaultError (C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\@smithy\smithy-client\dist-cjs\index.js:859:20)
+    at C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\@smithy\smithy-client\dist-cjs\index.js:868:5
+    at de_CommandError (C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\@aws-sdk\client-dynamodb\dist-cjs\index.js:2230:14)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\@smithy\middleware-serde\dist-cjs\index.js:35:20
+    at async C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\@aws-sdk\lib-dynamodb\dist-cjs\index.js:164:30
+    at async C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\@smithy\core\dist-cjs\index.js:165:18
+    at async C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\@smithy\middleware-retry\dist-cjs\index.js:320:38
+    at async C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\@aws-sdk\middleware-logger\dist-cjs\index.js:34:22
+    at async Object.getTicketById (C:\Users\luiss\OneDrive\Documents\foundation-project\src\repositories\ticketDAO.js:103:26)
+2024-09-23T03:11:49.296Z [INFO] Server is running on port: 3000
+2024-09-23T03:11:52.763Z [ERROR] Error at updateTicketStatus() for employee manager1 Cannot set headers after they are sent to the client
+Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+    at ServerResponse.setHeader (node:_http_outgoing:652:11)
+    at ServerResponse.header (C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\express\lib\response.js:794:10)
+    at ServerResponse.send (C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\express\lib\response.js:174:12)
+    at ServerResponse.json (C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\express\lib\response.js:278:15)
+    at updateTicketStatus (C:\Users\luiss\OneDrive\Documents\foundation-project\src\controllers\ticketController.js:104:32)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2024-09-23T03:12:18.254Z [INFO] Server is running on port: 3000
+2024-09-23T03:12:27.747Z [INFO] Server is running on port: 3000
+2024-09-23T03:12:38.142Z [INFO] Server is running on port: 3000
+2024-09-23T03:12:44.944Z [INFO] Server is running on port: 3000
+2024-09-23T03:13:03.847Z [INFO] Server is running on port: 3000
+2024-09-23T03:13:30.733Z [INFO] Server is running on port: 3000
+2024-09-23T03:13:33.329Z [ERROR] Error at updateTicketStatus() for employee manager1 Cannot set headers after they are sent to the client
+Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+    at ServerResponse.setHeader (node:_http_outgoing:652:11)
+    at ServerResponse.header (C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\express\lib\response.js:794:10)
+    at ServerResponse.send (C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\express\lib\response.js:174:12)
+    at ServerResponse.json (C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\express\lib\response.js:278:15)
+    at updateTicketStatus (C:\Users\luiss\OneDrive\Documents\foundation-project\src\controllers\ticketController.js:104:32)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2024-09-23T03:14:17.368Z [INFO] Server is running on port: 3000
+2024-09-23T03:14:20.947Z [INFO] Server is running on port: 3000
+2024-09-23T03:16:17.197Z [INFO] Server is running on port: 3000
+2024-09-23T03:16:31.557Z [INFO] Server is running on port: 3000
+2024-09-23T03:17:13.158Z [INFO] Server is running on port: 3000
+2024-09-23T03:18:07.177Z [INFO] Server is running on port: 3000
+2024-09-23T03:18:14.852Z [INFO] Server is running on port: 3000

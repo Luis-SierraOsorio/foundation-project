@@ -1,6 +1,7 @@
 const { documentClient } = require("../db/dynamoClient");
-const { QueryCommand, PutCommand } = require("@aws-sdk/lib-dynamodb");
+const { QueryCommand, PutCommand, UpdateCommand } = require("@aws-sdk/lib-dynamodb");
 const { logger } = require("../utils/logger");
+const { ReturnValue } = require("@aws-sdk/client-dynamodb");
 
 async function submitTicket(data) {
     /**
@@ -86,8 +87,64 @@ async function getTicketsByEmployeeId(employeeId) {
     }
 }
 
+async function getTicketById(ticketId) {
+    /**
+     * DAO layer function to get ticket based on the ticket ID
+     */
+    try {
+
+        // setting params
+        const params = {
+            TableName: process.env.TABLE_NAME_TICKET,
+            KeyConditionExpression: "#ticket_id = :ticketId",
+            ExpressionAttributeNames: { "#ticket_id": "ticket_id" },
+            ExpressionAttributeValues: { ":ticketId": ticketId }
+        }
+
+        // getting existing ticket
+        const response = await documentClient.send(new QueryCommand(params));
+        return response.Items[0];
+
+    } catch (error) {
+        logger.error(`Failed to get ticket of ticket ID: ${ticketId} from database`, error);
+        throw new Error(`Failed to getticket of ticket ID: ${ticketId} from database`);
+    }
+}
+
+async function updateTicketStatus(status, ticketId) {
+    /**
+     * DAO layer function to update given ticket status
+     */
+    try {
+
+        // params
+        const params = {
+            TableName: process.env.TABLE_NAME_TICKET,
+            Key: { ticket_id: ticketId },
+            UpdateExpression: "set #status = :status",
+            ExpressionAttributeNames: {
+                "#status": "status"
+            },
+            ExpressionAttributeValues: {
+                ":status": status
+            },
+            ReturnValues: "ALL_NEW"
+
+        }
+
+        const response = await documentClient.send(new UpdateCommand(params));
+        return response.Attributes;
+
+    } catch (error) {
+        logger.error(`Failed to update ticket of ticket ID: ${ticketId} from database`, error);
+        throw new Error(`Failed to update ticket of ticket ID: ${ticketId} from database`);
+    }
+}
+
 module.exports = {
     submitTicket,
     getTicketsByStatus,
-    getTicketsByEmployeeId
+    getTicketsByEmployeeId,
+    updateTicketStatus,
+    getTicketById
 }

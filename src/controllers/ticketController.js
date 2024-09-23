@@ -76,14 +76,38 @@ async function getTicketsByEmployeeId(req, res) {
         return res.status(200).json({ response });
 
     } catch (error) {
-        logger.error(`Error at getTicketsByEmployeeId for employee ${req.user.username}`, error);
-        throw new Error(`Error at getTicketsByEmployeeId for employee ${req.user.username}`);
+        logger.error(`Error at getTicketsByEmployeeId() for employee ${req.user.username}`, error);
+        throw new Error(`Error at getTicketsByEmployeeId() for employee ${req.user.username}`);
     }
 
 }
 
-function updateTicketStatus(req, res) {
-    console.log("Received POST request to update ticket status");
+async function updateTicketStatus(req, res) {
+    // controller function to update ticket status
+
+    try {
+
+        // I expect new status from the body
+        const { status } = req.body;
+        const { ticketId } = req.params
+        const { role } = req.user;
+
+        // returns null if missing info, or empty list/object if no ticket is found, or returns the new ticket
+        const response = await ticketService.updateTicketStatus(status, ticketId, role);
+
+        // block checks if response is null or empty
+        if (!response) {
+            return res.status(401).json({ message: `Invalid parameters/invalid user` });
+        } else if (response.length === 0) {
+            return res.status(404).json({ message: `ticket not found` });
+        }
+
+        return res.status(200).json({ message: `ticket updated` });
+
+    } catch (error) {
+        logger.error(`Error at updateTicketStatus() for managaer ${req.user.username}`, error);
+        throw new Error(`Error at updateTicketStatus() for manager ${req.user.username}`);
+    }
 
 }
 

@@ -17,6 +17,6 @@ router.get("/status/:status", validateJWTAccess, getTicketsByStatus);
 router.get("/my-tickets", validateJWTAccess, getTicketsByEmployeeId);
 
 // route to handle the changing of a ticket status
-router.patch("/:ticket_id/status", updateTicketStatus);
+router.patch("/:ticketId/status", validateJWTAccess, updateTicketStatus);
 
 module.exports = router;

@@ -82,8 +82,36 @@ async function getTicketsByEmployeeId(employeeId) {
     }
 }
 
+async function updateTicketStatus(status, ticketId, role) {
+
+    try {
+
+        // checking function params
+        if (!status || !ticketId || role !== 'manager') {
+            return null;
+        }
+
+        const existingTicket = await ticketDAO.getTicketById(ticketId);
+
+        // block checks in ticket status has already been changed
+        if (existingTicket.status !== "pending") {
+            return null;
+        }
+
+        const response = await ticketDAO.updateTicketStatus(status, ticketId);
+
+        return response;
+
+    } catch (error) {
+        logger.error(`Failed updating ticket status for ticket ID: ${ticketId}`, error);
+        throw new Error(`Failed updating ticket status for ticket ID: ${ticketId}`);
+    }
+
+}
+
 module.exports = {
     submitTicket,
     getTicketsByStatus,
-    getTicketsByEmployeeId
+    getTicketsByEmployeeId,
+    updateTicketStatus
 }
