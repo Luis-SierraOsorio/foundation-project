@@ -1,2 +1,32 @@
 2024-09-22T19:56:51.015Z [INFO] Server is running on port: 3000
 2024-09-22T20:04:09.855Z [INFO] Server is running on port: 3000
+2024-09-22T20:05:53.188Z [INFO] Server is running on port: 3000
+2024-09-23T01:44:20.513Z [INFO] Server is running on port: 3000
+2024-09-23T01:46:54.705Z [INFO] Server is running on port: 3000
+2024-09-23T01:47:22.629Z [INFO] Server is running on port: 3000
+2024-09-23T01:47:32.673Z [INFO] Server is running on port: 3000
+2024-09-23T02:13:21.856Z [INFO] Server is running on port: 3000
+2024-09-23T02:13:47.404Z [INFO] Server is running on port: 3000
+2024-09-23T02:13:57.395Z [INFO] Server is running on port: 3000
+2024-09-23T02:15:12.041Z [ERROR] Failed retrieving tickets by employee ID: 4fcca128-3132-47e4-87be-229110c65ed2 ticketService is not defined
+ReferenceError: ticketService is not defined
+    at Object.getTicketsByEmployeeId (C:\Users\luiss\OneDrive\Documents\foundation-project\src\services\ticketService.js:74:26)
+    at getTicketsByEmployeeId (C:\Users\luiss\OneDrive\Documents\foundation-project\src\controllers\ticketController.js:69:46)
+    at Layer.handle [as handle_request] (C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\express\lib\router\route.js:149:13)
+    at validateJWTAccess (C:\Users\luiss\OneDrive\Documents\foundation-project\src\middleware\validateJWTAccess.js:23:9)
+    at Layer.handle [as handle_request] (C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\luiss\OneDrive\Documents\foundation-project\node_modules\express\lib\router\index.js:284:15
+2024-09-23T02:16:10.796Z [INFO] Server is running on port: 3000
+2024-09-23T02:17:48.200Z [INFO] Server is running on port: 3000
+2024-09-23T02:18:11.772Z [INFO] Server is running on port: 3000
+2024-09-23T02:18:14.431Z [INFO] Server is running on port: 3000
+2024-09-23T02:18:16.009Z [INFO] Server is running on port: 3000
+2024-09-23T02:18:32.928Z [INFO] Server is running on port: 3000
+2024-09-23T02:18:36.329Z [INFO] Server is running on port: 3000
+2024-09-23T02:20:00.797Z [INFO] Server is running on port: 3000
+2024-09-23T02:20:16.937Z [INFO] Server is running on port: 3000
+2024-09-23T02:20:22.029Z [INFO] Server is running on port: 3000

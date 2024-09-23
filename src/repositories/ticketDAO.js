@@ -61,7 +61,33 @@ async function getTicketsByStatus(status) {
     }
 }
 
+async function getTicketsByEmployeeId(employeeId) {
+    /**
+     * DAO layer function to handle querying the db for tickets of specified user
+     */
+
+    try {
+        // params to query the employee_id global index table
+        const params = {
+            TableName: process.env.TABLE_NAME_TICKET,
+            IndexName: "employee_id-index",
+            KeyConditionExpression: "#employee_id = :employeeId",
+            ExpressionAttributeNames: { "#employee_id": "employee_id" },
+            ExpressionAttributeValues: { ":employeeId": employeeId }
+        }
+
+        // returns json object containing Items (can be [] or full)
+        const response = await documentClient.send(new QueryCommand(params));
+
+        return response.Items;
+    } catch (error) {
+        logger.error(`Failed to retrieve ticket of employeeId ${employeeId} from database`, error);
+        throw new Error(`Failed to retrieve ticket of employeeId ${employeeId} from database`);
+    }
+}
+
 module.exports = {
     submitTicket,
-    getTicketsByStatus
+    getTicketsByStatus,
+    getTicketsByEmployeeId
 }

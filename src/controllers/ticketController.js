@@ -56,8 +56,29 @@ async function getTicketsByStatus(req, res) {
     }
 }
 
-function getTicketsByEmployeeId(req, res) {
-    console.log("Received GET request to see tickets by employee id");
+async function getTicketsByEmployeeId(req, res) {
+    /**
+     * controller function to return current employee's ticket history
+     */
+
+    try {
+        // getting employeeId from the JWT 
+        const { employeeId } = req.user;
+
+        // passing into service layer function and awaiting response, should return [] - no tokens OR [{data}] - for history
+        const response = await ticketService.getTicketsByEmployeeId(employeeId);
+
+        // block checks if response is empty
+        if (!response || response.length === 0) {
+            return res.status(404).json({ message: "no ticket history" });
+        }
+
+        return res.status(200).json({ response });
+
+    } catch (error) {
+        logger.error(`Error at getTicketsByEmployeeId for employee ${req.user.username}`, error);
+        throw new Error(`Error at getTicketsByEmployeeId for employee ${req.user.username}`);
+    }
 
 }
 

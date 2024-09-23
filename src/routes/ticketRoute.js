@@ -14,7 +14,7 @@ router.post("/submit", validateTicketsBodyParams, validateJWTAccess, submitTicke
 router.get("/status/:status", validateJWTAccess, getTicketsByStatus);
 
 // route to handle seeing an employee's ticket history, will get employee_id with jwt-tokens
-router.get("/:employee_id", getTicketsByEmployeeId);
+router.get("/my-tickets", validateJWTAccess, getTicketsByEmployeeId);
 
 // route to handle the changing of a ticket status
 router.patch("/:ticket_id/status", updateTicketStatus);

@@ -7,8 +7,9 @@ function validateJWTAccess(req, res, next) {
     let token = req.headers.authorization;
 
     // block checks for valid token
-    if (!token) {
-        res.status(401).json({ message: "Please log in" });
+    if (!token || token.length <= 1) {
+        // token is expect in the form of "Bearer <token>"
+        return res.status(401).json({ message: "Please log in" });
     }
 
     // getting token

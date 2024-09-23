@@ -43,6 +43,7 @@ async function getTicketsByStatus(status, role) {
         // some string sanitization
         status = status.toLowerCase().trim();
 
+        // block checks to make sure its a manager
         if (role !== "manager") {
             return null;
         }
@@ -63,10 +64,26 @@ async function getTicketsByStatus(status, role) {
         logger.error(`Failed retrieving tickets by status: ${status}`, error);
         throw new Error(`Failed retrieving tickets by status ${status}`);
     }
+}
 
+async function getTicketsByEmployeeId(employeeId) {
+
+    try {
+
+        // calling DAO layer function to query tickets of specific logged in employee
+        const response = ticketDAO.getTicketsByEmployeeId(employeeId);
+
+        // response should be empty or at least have 1 item
+        return response;
+
+    } catch (error) {
+        logger.error(`Failed retrieving tickets by employee ID: ${employeeId}`, error);
+        throw new Error(`Failed retrieving tickets by employee ID: ${employeeId}`);
+    }
 }
 
 module.exports = {
     submitTicket,
-    getTicketsByStatus
+    getTicketsByStatus,
+    getTicketsByEmployeeId
 }
