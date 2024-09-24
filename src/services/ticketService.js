@@ -4,7 +4,7 @@ const { logger } = require("../utils/logger");
 
 async function submitTicket(employeeId, amount, description, status) {
     /**
-     * service function to submit ticket
+     * service function to submit ticket to db on the DAO layer
      */
 
     try {
@@ -20,15 +20,16 @@ async function submitTicket(employeeId, amount, description, status) {
             status: status
         }
 
-        // calling DAO layer submit ticket
+        // DAO layer function call to submit ticket
         const response = await ticketDAO.submitTicket(ticket);
 
-        // block of code checks if putcommand failed
-        if (response === null) {
+        // block to return null if persistance fails
+        if (!response) {
             return null
-        };
+        }
 
-        return response;
+        // DAO layer funciton call returns {..., Items: [...{<data>}]}
+        return await getTicketById(ticketId);
 
     } catch (error) {
         logger.error(`Failed to submit ticket`, error);
@@ -37,13 +38,36 @@ async function submitTicket(employeeId, amount, description, status) {
 
 }
 
+async function getTicketById(ticketId) {
+    /**
+     * service layer function to query ticket by id from db
+     */
+    try {
+        //DAO layer function call, returns [], {..., Items: [...{<data>}]}
+        const returnedTicket = await ticketDAO.getTicketById(ticketId);
+
+        // block checks returnedTicket
+        if (returnedTicket.length === 0) {
+            return null;
+        } else {
+            return returnedTicket.Items[0];
+        }
+    } catch (error) {
+        logger.error(`Failed to retrieve ticket by id`, error);
+        throw new Error(`Failed to retrieve ticket by id`)
+    }
+}
+
 async function getTicketsByStatus(status, role) {
+    /**
+     * service layer function to handle query tickets by status
+     */
 
     try {
-        // some string sanitization
+        // string sanitization
         status = status.toLowerCase().trim();
 
-        // block checks to make sure its a manager
+        // block checks that role is manager to prevent employee role from accessing
         if (role !== "manager") {
             return null;
         }
@@ -51,15 +75,15 @@ async function getTicketsByStatus(status, role) {
         // set to hold possible statuses
         const statuses = new Set(["pending", "approved", "denied"]);
 
-        // checking if given status is within our possible statuses
+        // block checks if status is within possible statuses
         if (!statuses.has(status)) {
             return [];
         }
 
-        // repsonse is an array, either null, empty or contains items
-        const response = await ticketDAO.getTicketsByStatus(status);
+        // DAO layer funciton call, returns null, [], {..., Items: [...{<data>}]}
+        const returnedTickets = await ticketDAO.getTicketsByStatus(status);
+        return returnedTickets.Items;
 
-        return response;
     } catch (error) {
         logger.error(`Failed retrieving tickets by status: ${status}`, error);
         throw new Error(`Failed retrieving tickets by status ${status}`);
@@ -67,14 +91,16 @@ async function getTicketsByStatus(status, role) {
 }
 
 async function getTicketsByEmployeeId(employeeId) {
+    /**
+     * service layer function to handle querying tickets by provided status
+     */
 
     try {
 
-        // calling DAO layer function to query tickets of specific logged in employee
-        const response = ticketDAO.getTicketsByEmployeeId(employeeId);
+        // DAO layer function call, returns [], {..., Items: [...{<data>}]}
+        const returnedTickets = await ticketDAO.getTicketsByEmployeeId(employeeId);
 
-        // response should be empty or at least have 1 item
-        return response;
+        return returnedTickets.Items;
 
     } catch (error) {
         logger.error(`Failed retrieving tickets by employee ID: ${employeeId}`, error);
@@ -83,24 +109,27 @@ async function getTicketsByEmployeeId(employeeId) {
 }
 
 async function updateTicketStatus(status, ticketId, role) {
+    /**
+     * service layer function to handle the updating of a ticket status
+     */
 
     try {
 
-        // checking function params
+        // 
         if (!status || !ticketId || role !== 'manager') {
             return null;
         }
 
+        // DAO function call, returns null - no ticket, {..., Items: [...{<data>}]}
         const existingTicket = await ticketDAO.getTicketById(ticketId);
 
-        // block checks in ticket status has already been changed
-        if (existingTicket.status !== "pending") {
-            return null;
+        // block checks existingTicket status to make sure they can't update an already processed ticket
+        if (existingTicket.Items[0].status !== "pending") {
+            return [];
         }
 
         const response = await ticketDAO.updateTicketStatus(status, ticketId);
-
-        return response;
+        return response.Attributes;
 
     } catch (error) {
         logger.error(`Failed updating ticket status for ticket ID: ${ticketId}`, error);

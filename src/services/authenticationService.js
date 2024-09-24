@@ -13,7 +13,6 @@ async function getEmployeeByUsername(username) {
     try {
         // DAO layer function to query based on username, returns [] empty or with objects
         const returnedEmployeeArray = await employeeDAO.getEmployeeByUsername(username);
-        console.log(returnedEmployeeArray)
 
         // block checks if returnedEmployee exists or not
         if (returnedEmployeeArray.length === 0) {

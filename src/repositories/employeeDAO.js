@@ -27,10 +27,7 @@ async function getEmployeeByUsername(username) {
         }
 
         // querying data from db, returns [] either empty or with objects under response attribute 
-        const data = await documentClient.send(new QueryCommand(params));
-
-        return data;
-
+        return await documentClient.send(new QueryCommand(params));
     } catch (error) {
         logger.error(`Error retrieving employee by username: ${username}`, error);
         throw new Error(`Database query failed for username: ${username}. Ensure the index exists and the connection is valid.`);
@@ -55,11 +52,7 @@ async function createEmployee(employeeObject) {
         };
 
         // performing the persistance call
-        const response = await documentClient.send(new PutCommand(params));
-
-        // will always return something no matter what
-        return response;
-
+        return await documentClient.send(new PutCommand(params));
     } catch (error) {
         logger.error(`Error creating employee with username: ${employeeObject.username}`, error);
         throw new Error(`Failed to persist employee data for username: ${employeeObject.username}. Check table permissions or structure.`);

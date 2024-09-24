@@ -327,3 +327,143 @@ ReferenceError: account is not defined
 2024-09-24T01:57:58.087Z [INFO] Server is running on port: 3000
 2024-09-24T01:58:13.634Z [INFO] Server is running on port: 3000
 2024-09-24T01:59:58.844Z [INFO] Server is running on port: 3000
+2024-09-24T02:18:24.455Z [INFO] Server is running on port: 3000
+2024-09-24T02:20:18.460Z [INFO] Server is running on port: 3000
+2024-09-24T02:20:30.082Z [INFO] Server is running on port: 3000
+2024-09-24T02:20:32.248Z [INFO] Server is running on port: 3000
+2024-09-24T02:21:42.537Z [INFO] Server is running on port: 3000
+2024-09-24T02:21:50.593Z [INFO] Server is running on port: 3000
+2024-09-24T02:21:59.233Z [INFO] Server is running on port: 3000
+2024-09-24T02:22:24.457Z [INFO] Server is running on port: 3000
+2024-09-24T02:22:40.535Z [INFO] Server is running on port: 3000
+2024-09-24T02:24:42.515Z [INFO] Server is running on port: 3000
+2024-09-24T02:25:10.910Z [INFO] Server is running on port: 3000
+2024-09-24T02:25:16.376Z [INFO] Server is running on port: 3000
+2024-09-24T02:25:36.166Z [INFO] Server is running on port: 3000
+2024-09-24T02:25:39.503Z [INFO] Server is running on port: 3000
+2024-09-24T02:25:47.636Z [INFO] Server is running on port: 3000
+2024-09-24T02:26:00.955Z [INFO] Server is running on port: 3000
+2024-09-24T02:26:28.898Z [INFO] Server is running on port: 3000
+2024-09-24T02:26:30.776Z [INFO] Server is running on port: 3000
+2024-09-24T02:26:47.200Z [INFO] Server is running on port: 3000
+2024-09-24T02:28:04.348Z [INFO] Server is running on port: 3000
+2024-09-24T02:31:37.054Z [INFO] Server is running on port: 3000
+2024-09-24T02:32:10.653Z [INFO] Server is running on port: 3000
+2024-09-24T02:32:34.152Z [INFO] Server is running on port: 3000
+2024-09-24T02:33:32.163Z [INFO] Server is running on port: 3000
+2024-09-24T02:33:45.516Z [INFO] Server is running on port: 3000
+2024-09-24T02:35:22.331Z [INFO] Server is running on port: 3000
+2024-09-24T02:35:29.844Z [INFO] Server is running on port: 3000
+2024-09-24T02:35:37.758Z [INFO] Server is running on port: 3000
+2024-09-24T02:35:42.773Z [INFO] Server is running on port: 3000
+2024-09-24T02:35:45.540Z [INFO] Server is running on port: 3000
+2024-09-24T02:36:09.387Z [INFO] Server is running on port: 3000
+2024-09-24T02:36:15.159Z [INFO] Server is running on port: 3000
+2024-09-24T02:36:31.777Z [INFO] Server is running on port: 3000
+2024-09-24T02:36:49.975Z [INFO] Server is running on port: 3000
+2024-09-24T02:36:57.755Z [INFO] Server is running on port: 3000
+2024-09-24T02:37:44.324Z [INFO] Server is running on port: 3000
+2024-09-24T02:38:21.839Z [INFO] Server is running on port: 3000
+2024-09-24T02:38:34.396Z [INFO] Server is running on port: 3000
+2024-09-24T15:17:15.519Z [INFO] Server is running on port: 3000
+2024-09-24T15:20:30.668Z [INFO] Server is running on port: 3000
+2024-09-24T15:20:56.091Z [INFO] Server is running on port: 3000
+2024-09-24T15:21:07.692Z [INFO] Server is running on port: 3000
+2024-09-24T15:21:52.826Z [INFO] Server is running on port: 3000
+2024-09-24T15:22:01.648Z [INFO] Server is running on port: 3000
+2024-09-24T15:22:46.121Z [INFO] Server is running on port: 3000
+2024-09-24T15:22:47.278Z [INFO] Server is running on port: 3000
+2024-09-24T15:23:07.337Z [INFO] Server is running on port: 3000
+2024-09-24T15:23:42.059Z [INFO] Server is running on port: 3000
+2024-09-24T15:23:43.738Z [INFO] Server is running on port: 3000
+2024-09-24T15:23:59.564Z [INFO] Server is running on port: 3000
+2024-09-24T15:24:07.495Z [INFO] Server is running on port: 3000
+2024-09-24T15:24:14.258Z [INFO] Server is running on port: 3000
+2024-09-24T15:24:29.763Z [INFO] Server is running on port: 3000
+2024-09-24T15:24:51.038Z [INFO] Server is running on port: 3000
+2024-09-24T15:27:33.528Z [INFO] Server is running on port: 3000
+2024-09-24T15:27:57.643Z [INFO] Server is running on port: 3000
+2024-09-24T15:28:12.073Z [INFO] Server is running on port: 3000
+2024-09-24T15:28:40.514Z [INFO] Server is running on port: 3000
+2024-09-24T15:28:41.291Z [INFO] Server is running on port: 3000
+2024-09-24T15:29:02.018Z [INFO] Server is running on port: 3000
+2024-09-24T15:29:02.669Z [INFO] Server is running on port: 3000
+2024-09-24T15:29:52.518Z [INFO] Server is running on port: 3000
+2024-09-24T15:30:00.170Z [INFO] Server is running on port: 3000
+2024-09-24T15:30:14.298Z [INFO] Server is running on port: 3000
+2024-09-24T15:30:27.848Z [INFO] Server is running on port: 3000
+2024-09-24T15:30:57.848Z [INFO] Server is running on port: 3000
+2024-09-24T15:31:02.924Z [INFO] Server is running on port: 3000
+2024-09-24T15:31:21.448Z [INFO] Server is running on port: 3000
+2024-09-24T15:31:34.559Z [INFO] Server is running on port: 3000
+2024-09-24T15:31:51.280Z [INFO] Server is running on port: 3000
+2024-09-24T15:31:56.293Z [INFO] Server is running on port: 3000
+2024-09-24T15:32:05.878Z [INFO] Server is running on port: 3000
+2024-09-24T15:32:33.088Z [INFO] Server is running on port: 3000
+2024-09-24T15:32:37.101Z [INFO] Server is running on port: 3000
+2024-09-24T15:32:46.328Z [INFO] Server is running on port: 3000
+2024-09-24T15:33:05.913Z [INFO] Server is running on port: 3000
+2024-09-24T15:33:48.918Z [INFO] Server is running on port: 3000
+2024-09-24T15:33:59.438Z [INFO] Server is running on port: 3000
+2024-09-24T15:34:25.423Z [INFO] Server is running on port: 3000
+2024-09-24T15:34:46.698Z [INFO] Server is running on port: 3000
+2024-09-24T15:34:50.879Z [INFO] Server is running on port: 3000
+2024-09-24T15:35:14.988Z [INFO] Server is running on port: 3000
+2024-09-24T15:35:16.101Z [INFO] Server is running on port: 3000
+2024-09-24T15:35:19.268Z [INFO] Server is running on port: 3000
+2024-09-24T15:35:59.629Z [INFO] Server is running on port: 3000
+2024-09-24T15:36:02.128Z [INFO] Server is running on port: 3000
+2024-09-24T15:36:27.708Z [INFO] Server is running on port: 3000
+2024-09-24T15:36:47.988Z [INFO] Server is running on port: 3000
+2024-09-24T15:37:10.408Z [INFO] Server is running on port: 3000
+2024-09-24T15:38:36.642Z [INFO] Server is running on port: 3000
+2024-09-24T15:38:43.851Z [INFO] Server is running on port: 3000
+2024-09-24T15:38:52.134Z [INFO] Server is running on port: 3000
+2024-09-24T15:38:55.620Z [INFO] Server is running on port: 3000
+2024-09-24T15:39:00.498Z [INFO] Server is running on port: 3000
+2024-09-24T15:39:28.278Z [INFO] Server is running on port: 3000
+2024-09-24T15:41:51.888Z [INFO] Server is running on port: 3000
+2024-09-24T17:17:16.895Z [INFO] Server is running on port: 3000
+2024-09-24T17:17:27.210Z [ERROR] Failed to retrieve ticket by id Cannot read properties of undefined (reading 'length')
+TypeError: Cannot read properties of undefined (reading 'length')
+    at getTicketById (C:\Users\luiss\OneDrive\Documents\foundation-project\src\services\ticketService.js:49:28)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.submitTicket (C:\Users\luiss\OneDrive\Documents\foundation-project\src\services\ticketService.js:31:16)
+    at async submitTicket (C:\Users\luiss\OneDrive\Documents\foundation-project\src\controllers\ticketController.js:15:31)
+2024-09-24T17:17:27.213Z [ERROR] Failed to submit ticket Failed to retrieve ticket by id
+Error: Failed to retrieve ticket by id
+    at getTicketById (C:\Users\luiss\OneDrive\Documents\foundation-project\src\services\ticketService.js:56:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.submitTicket (C:\Users\luiss\OneDrive\Documents\foundation-project\src\services\ticketService.js:31:16)
+    at async submitTicket (C:\Users\luiss\OneDrive\Documents\foundation-project\src\controllers\ticketController.js:15:31)
+2024-09-24T17:17:27.215Z [ERROR] Error in submitTicket() Failed to submit new ticket for employeeId: 4fcca128-3132-47e4-87be-229110c65ed2
+Error: Failed to submit new ticket for employeeId: 4fcca128-3132-47e4-87be-229110c65ed2
+    at Object.submitTicket (C:\Users\luiss\OneDrive\Documents\foundation-project\src\services\ticketService.js:35:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async submitTicket (C:\Users\luiss\OneDrive\Documents\foundation-project\src\controllers\ticketController.js:15:31)
+2024-09-24T17:17:49.897Z [INFO] Server is running on port: 3000
+2024-09-24T17:17:50.985Z [INFO] Server is running on port: 3000
+2024-09-24T17:18:35.950Z [INFO] Server is running on port: 3000
+2024-09-24T17:18:40.678Z [INFO] Server is running on port: 3000
+2024-09-24T17:19:03.613Z [INFO] Server is running on port: 3000
+2024-09-24T17:19:15.225Z [INFO] Server is running on port: 3000
+2024-09-24T17:19:32.634Z [INFO] Server is running on port: 3000
+2024-09-24T17:20:34.369Z [INFO] Server is running on port: 3000
+2024-09-24T17:20:49.262Z [INFO] Server is running on port: 3000
+2024-09-24T17:21:24.429Z [INFO] Server is running on port: 3000
+2024-09-24T17:21:57.083Z [INFO] Server is running on port: 3000
+2024-09-24T17:23:01.290Z [INFO] Server is running on port: 3000
+2024-09-24T17:23:10.501Z [INFO] Server is running on port: 3000
+2024-09-24T17:23:13.991Z [INFO] Server is running on port: 3000
+2024-09-24T17:23:19.324Z [INFO] Server is running on port: 3000
+2024-09-24T17:23:32.538Z [INFO] Server is running on port: 3000
+2024-09-24T17:25:15.000Z [INFO] Server is running on port: 3000
+2024-09-24T17:25:19.908Z [INFO] Server is running on port: 3000
+2024-09-24T17:25:31.626Z [INFO] Server is running on port: 3000
+2024-09-24T17:26:30.949Z [INFO] Server is running on port: 3000
+2024-09-24T17:26:38.738Z [INFO] Server is running on port: 3000
+2024-09-24T17:27:17.562Z [INFO] Server is running on port: 3000
+2024-09-24T17:27:20.446Z [INFO] Server is running on port: 3000
+2024-09-24T17:27:58.570Z [INFO] Server is running on port: 3000
+2024-09-24T17:28:04.461Z [INFO] Server is running on port: 3000
+2024-09-24T17:28:31.804Z [INFO] Server is running on port: 3000
