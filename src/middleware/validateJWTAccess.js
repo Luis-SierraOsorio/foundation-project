@@ -2,28 +2,32 @@ require('dotenv').config({ path: "../.env" });
 const jwt = require("jsonwebtoken");
 
 function validateJWTAccess(req, res, next) {
+    /**
+     * middleware function to handle the verification of JWT
+     */
 
-    // destructure header for JWT
+    // destructuring header for JWT
     let token = req.headers.authorization;
 
-    // block checks for valid token
+    // block checks for valid token structure
     if (!token || token.length <= 1) {
-        // token is expect in the form of "Bearer <token>"
-        return res.status(401).json({ message: "Please log in" });
+        return res.status(401).json({ message: "Please log in." });
     }
 
-    // getting token
+    // token is expected in the form of "Bearer <token>"
     token = token.split(" ")[1];
 
-    // verify the token
+    // block verifies the token
     try {
+        // verification function for JWT
         let decodedToken = jwt.verify(token, process.env.MY_SECRET);
-        // assign user to the req from the decoded token
+
+        // if token is decoded successfully contents are saved to the request under user
         req.user = decodedToken;
+
         next();
     } catch (error) {
-        console.log(error);
-        res.status(401).json({ message: "Sorry token not acceptable" });
+        res.status(401).json({ message: "Sorry, token not valid." });
     }
 }
 

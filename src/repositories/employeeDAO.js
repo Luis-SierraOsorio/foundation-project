@@ -9,7 +9,7 @@ const TABLE_NAME = process.env.TABLE_NAME_EMPLOYEE;
 
 async function getEmployeeByUsername(username) {
     /**
-     * function to get an employee by username from db
+     * DAO function to query employee table based on username
      */
 
     try {
@@ -17,21 +17,19 @@ async function getEmployeeByUsername(username) {
         const params = {
             TableName: TABLE_NAME,
             IndexName: 'username-index',
-            KeyConditionExpression: "username = :username",
+            KeyConditionExpression: "#username = :username",
+            ExpressionAttributeNames: {
+                "#username": "username"
+            },
             ExpressionAttributeValues: {
                 ":username": username
             }
         }
 
-        // getting the data returned from the query command
+        // querying data from db, returns [] either empty or with objects under response attribute 
         const data = await documentClient.send(new QueryCommand(params));
 
-        // block to return null if data is empty
-        if (!data.Items || data.Items.length === 0) {
-            return null;
-        }
-
-        return data.Items[0];
+        return data;
 
     } catch (error) {
         logger.error(`Error retrieving employee by username: ${username}`, error);
@@ -61,6 +59,7 @@ async function createEmployee(employeeObject) {
 
         // will always return something no matter what
         return response;
+
     } catch (error) {
         logger.error(`Error creating employee with username: ${employeeObject.username}`, error);
         throw new Error(`Failed to persist employee data for username: ${employeeObject.username}. Check table permissions or structure.`);

@@ -1,22 +1,22 @@
 // imports
 const express = require("express");
-const { submitTicket, getTicketsByEmployeeId, getTicketsByStatus, updateTicketStatus } = require("../controllers/ticketController");
+const ticketController = require("../controllers/ticketController");
 const { validateTicketsBodyParams } = require("../middleware/validateTicketsBodyParams");
 const { validateJWTAccess } = require("../middleware/validateJWTAccess");
 
 // creating instance of Router class
 const router = express.Router();
 
-// route to submit a new ticket, expects amount and description in the body
-router.post("/submit", validateTicketsBodyParams, validateJWTAccess, submitTicket);
+// submit new ticket route, uses middleware to check body params and to validate JWT
+router.post("/submit", validateTicketsBodyParams, validateJWTAccess, ticketController.submitTicket);
 
-// route to get tickets based on a given status, expects uri filtering params
-router.get("/status", validateJWTAccess, getTicketsByStatus);
+// query ticket by status route, middelware to check JWT, Expects URI params
+router.get("/status", validateJWTAccess, ticketController.getTicketsByStatus);
 
-// route to handle seeing an employee's ticket history, will get employee_id with jwt-tokens
-router.get("/my-tickets", validateJWTAccess, getTicketsByEmployeeId);
+// ticket history route, middleware to check JWT
+router.get("/my-tickets", validateJWTAccess, ticketController.getTicketsByEmployeeId);
 
-// route to handle the changing of a ticket status
-router.patch("/:ticketId", validateJWTAccess, updateTicketStatus);
+// update ticket route, middelware to check JWT, expects body params
+router.patch("/:ticketId", validateJWTAccess, ticketController.updateTicketStatus);
 
 module.exports = router;

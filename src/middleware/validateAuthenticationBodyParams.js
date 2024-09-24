@@ -1,22 +1,14 @@
 function validateAuthenticationBodyParams(req, res, next) {
     /**
-     * middleware function to handle missing fields for the body in the register/login routes
+     * middleware function to check body params for register/login
      */
 
+    // destructure required fields from body
     const { username, password } = req.body;
 
-    // block to check if both fields are missing, if not then continue
+    // block checks if either the username or password is missing
     if (!username || !password) {
-        let message = "";
-        // block of code checks which fields are missing
-        if (!username && !password) {
-            message = "username and password are required!";
-        } else if (!username) {
-            message = "username is required!";
-        } else {
-            message = "password is required!";
-        }
-        return res.status(400).json({ message: message });
+        return res.status(400).json({ message: `Both username and password are required fields.` });
     } else {
         next();
     }

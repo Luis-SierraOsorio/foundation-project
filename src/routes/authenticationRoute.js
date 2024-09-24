@@ -1,24 +1,14 @@
-// imports
 const express = require("express");
-const {
-    registerAccount,
-    login } = require("../controllers/authenticationController");
-
-
-// middleware imports
+const authenticationController = require("../controllers/authenticationController");
 const { validateAuthenticationBodyParams } = require("../middleware/validateAuthenticationBodyParams");
-
 
 // creating instance of Router class
 router = express.Router();
 
-// middleware
-// router.use(validateAuthenticationBodyParams);
+// register route, uses middlware to check body params
+router.post("/register", validateAuthenticationBodyParams, authenticationController.registerAccount);
 
-// route to register, expects username and password in the req.body
-router.post("/register", validateAuthenticationBodyParams, registerAccount);
-
-// route to login, expects username and password in the req.body
-router.post("/login", validateAuthenticationBodyParams, login);
+// login route, uses middleware to check body params
+router.post("/login", validateAuthenticationBodyParams, authenticationController.login);
 
 module.exports = router;

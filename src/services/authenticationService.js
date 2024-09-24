@@ -1,27 +1,26 @@
-// connecting to the DAO layer
 const employeeDAO = require("../repositories/employeeDAO");
 const { v4: uuidv4 } = require("uuid");
 const { logger } = require("../utils/logger");
 const jwt = require("jsonwebtoken");
 
-// access to my environment file
 require('dotenv').config({ path: "../.env" });
 
 async function getEmployeeByUsername(username) {
     /**
-     * function to retrieve an employee object based on the given username
+     * service function to query employee by username from DAO layer
      */
 
     try {
-        // calling repository to get employee by username
-        const returnedEmployee = await employeeDAO.getEmployeeByUsername(username);
+        // DAO layer function to query based on username, returns [] empty or with objects
+        const returnedEmployeeArray = await employeeDAO.getEmployeeByUsername(username);
+        console.log(returnedEmployeeArray)
 
-        // block of code to check if returnedEmployee exist or not
-        if (returnedEmployee === null) {
+        // block checks if returnedEmployee exists or not
+        if (returnedEmployeeArray.length === 0) {
             return null;
+        } else {
+            return returnedEmployeeArray.Items[0];
         }
-
-        return returnedEmployee;
 
     } catch (error) {
         logger.error(`Error retrieving employee by username: ${username}`, error);
@@ -29,55 +28,13 @@ async function getEmployeeByUsername(username) {
     }
 }
 
-async function login(username, passwordCheck) {
-    /**
-     * function to check the password of the user
-     */
-
-    try {
-        // checking to see if an account with the username exists
-        const returnedEmployee = await getEmployeeByUsername(username);
-
-        // block of code to check if employee exist
-        if (returnedEmployee === null) {
-            return null;
-        }
-
-        const { password } = returnedEmployee;
-
-        // block of code to check if passwords match, if they do create and return jwt
-        if (password !== passwordCheck) {
-            // returning empty object, means that the passwords do not match
-            return {}
-        } else {
-
-            // creating jwt to send back to client
-            const token = jwt.sign({
-                username: returnedEmployee.username,
-                role: returnedEmployee.role,
-                employeeId: returnedEmployee.employee_id
-            },
-                process.env.MY_SECRET, {
-                expiresIn: '3d'
-            });
-
-            return { token };
-        }
-
-
-    } catch (error) {
-        logger.error(`Error checking password for username: ${username}`, error);
-        throw new Error(`Password check failed for username: ${username}`);
-    }
-}
-
 async function createEmployee(username, password, role) {
     /**
-     * function to create a new employee within the database
+     * service layer function to persist employee onto db using DAO layer
     */
 
     try {
-        // new employee object to be passed into the DAO
+        // new employee object to be passed into the DAO function call
         let newEmployee = {
             employeeId: uuidv4(),
             username: username,
@@ -88,8 +45,8 @@ async function createEmployee(username, password, role) {
         // persisting the new user
         const savedEmployee = await employeeDAO.createEmployee(newEmployee);
 
-        // return response
-        return savedEmployee;
+        // querying for the new user and returning it
+        return await getEmployeeByUsername(username);
 
     } catch (error) {
         logger.error(`Error creating employee for data: ${newEmployee} `, error);
@@ -102,4 +59,45 @@ module.exports = {
     getEmployeeByUsername,
     login,
     createEmployee
+}
+
+async function login(username, passwordCheck) {
+    /**
+     * service function to handle the login of an employee
+     */
+
+    try {
+        // check to see if employee exists, returns null or {} object 
+        const returnedEmployee = await getEmployeeByUsername(username);
+
+        // block checks returnedEmpoyee to be null, account doesn't exists
+        if (!returnedEmployee) {
+            return returnedEmployee;
+        }
+
+        // gets password from existing employee in db
+        const { password } = returnedEmployee;
+
+        // block compares password passed from controller and password in db, returns [] or JWT
+        if (password !== passwordCheck) {
+            return [];
+        } else {
+            // token creation
+            const token = jwt.sign({
+                username: returnedEmployee.username,
+                role: returnedEmployee.role,
+                employeeId: returnedEmployee.employee_id
+            },
+                process.env.MY_SECRET, {
+                expiresIn: '5d'
+            });
+
+            return { token };
+        }
+
+
+    } catch (error) {
+        logger.error(`Error checking password for username: ${username}`, error);
+        throw new Error(`Password check failed for username: ${username}`);
+    }
 }
