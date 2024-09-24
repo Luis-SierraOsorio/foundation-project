@@ -17,3 +17,16 @@ TypeError: Cannot read properties of undefined (reading 'status')
 2024-09-24T18:08:41.833Z [INFO] Server is running on port: 3000
 2024-09-24T18:08:51.997Z [INFO] Server is running on port: 3000
 2024-09-24T18:09:06.951Z [INFO] Server is running on port: 3000
+2024-09-24T18:11:48.255Z [INFO] Server is running on port: 3000
+2024-09-24T18:13:09.835Z [INFO] Server is running on port: 3000
+2024-09-24T18:13:29.657Z [INFO] Server is running on port: 3000
+2024-09-24T18:13:53.767Z [INFO] Server is running on port: 3000
+2024-09-24T18:14:02.839Z [ERROR] Service: Error retrieving ticket by status / getTicketByStatus()
+2024-09-24T18:14:02.840Z [ERROR] Controller: Error retrieving ticket by status / getTicketByStatus()
+2024-09-24T18:14:14.670Z [INFO] Server is running on port: 3000
+2024-09-24T18:14:41.319Z [INFO] Server is running on port: 3000
+2024-09-24T18:14:41.908Z [ERROR] Service: Error retrieving ticket by status / getTicketByStatus()
+2024-09-24T18:14:41.910Z [ERROR] Controller: Error retrieving ticket by status / getTicketByStatus()
+2024-09-24T18:14:46.693Z [ERROR] Service: Error retrieving ticket by status / getTicketByStatus()
+2024-09-24T18:14:46.694Z [ERROR] Controller: Error retrieving ticket by status / getTicketByStatus()
+2024-09-24T18:14:56.444Z [INFO] Server is running on port: 3000

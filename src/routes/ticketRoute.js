@@ -11,10 +11,10 @@ const router = express.Router();
 router.post("/submit", validateTicketsBodyParams, validateJWTAccess, ticketController.submitTicket);
 
 // query ticket by status route, middleware to check JWT, Expects URI params
-router.get("/status", validateJWTAccess, ticketController.getTicketsByStatus);
+router.get("", validateJWTAccess, ticketController.getTicketsByStatus);
 
 // ticket history route, middleware to check JWT
-router.get("/my-tickets", validateJWTAccess, ticketController.getTicketsByEmployeeId);
+router.get("/history", validateJWTAccess, ticketController.getTicketsByEmployeeId);
 
 // update ticket route, middleware to check JWT, expects body params
 router.patch("/:ticketId", validateJWTAccess, ticketController.updateTicketStatus);
