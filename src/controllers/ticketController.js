@@ -29,8 +29,8 @@ async function submitTicket(req, res) {
         }
 
     } catch (error) {
-        logger.error(`Error in submitTicket()`, error);
-        res.status(500).json({ message: `Internal service error` });
+        logger.error(`Controller: Error submitting new ticket / submitTicket()`, { error });
+        res.status(500).json({ message: `Internal service error submitting new ticket` });
     }
 }
 
@@ -62,8 +62,8 @@ async function getTicketsByStatus(req, res) {
             tickets: returnedTicket
         });
     } catch (error) {
-        logger.error(`Error at getTicketsByStatus() for status: ${req.params.status}`, error);
-        throw new Error(`Error at getTicketsByStatus() for status: ${req.params.status}`);
+        logger.error(`Controller: Error retrieving ticket by status / getTicketByStatus()`, { error });
+        res.status(500).json({ message: `Internal service error at retrieving ticket by status` });
     }
 }
 
@@ -91,8 +91,8 @@ async function getTicketsByEmployeeId(req, res) {
         });
 
     } catch (error) {
-        logger.error(`Error at getTicketsByEmployeeId() for employee ${req.user.username}`, error);
-        throw new Error(`Error at getTicketsByEmployeeId() for employee ${req.user.username}`);
+        logger.error(`Controller: Error retrieving ticket by employee id / getTicketsByEmployeeId()`, { error });
+        res.status(500).json({ message: `Internal service error retrieiving ticket history` });
     }
 
 }
@@ -116,7 +116,7 @@ async function updateTicketStatus(req, res) {
         if (!updatedTicket) {
             return res.status(401).json({ message: `No ticket found.` });
         } else if (updatedTicket.length === 0) {
-            return res.status(404).json({ message: `Ticket parameters invalid.` });
+            return res.status(400).json({ message: `Ticket parameters invalid.` });
         }
 
         return res.status(200).json({
@@ -127,8 +127,8 @@ async function updateTicketStatus(req, res) {
         });
 
     } catch (error) {
-        logger.error(`Error at updateTicketStatus() for managaer ${req.user.username}`, error);
-        throw new Error(`Error at updateTicketStatus() for manager ${req.user.username}`);
+        logger.error(`Controller: Error updating ticket status / updateTicketStatus()`, { error });
+        res.status(500).json({ message: `Internal service error updating ticket status` });
     }
 
 }

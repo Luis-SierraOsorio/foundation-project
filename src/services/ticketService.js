@@ -32,8 +32,8 @@ async function submitTicket(employeeId, amount, description, status) {
         return await getTicketById(ticketId);
 
     } catch (error) {
-        logger.error(`Failed to submit ticket`, error);
-        throw new Error(`Failed to submit new ticket for employeeId: ${employeeId}`)
+        logger.error(`Service: Error submitting ticket / submitTicket()`, { error });
+        throw new Error(`Service: Failed to submit new ticket`);
     }
 
 }
@@ -53,8 +53,8 @@ async function getTicketById(ticketId) {
             return returnedTicket.Items[0];
         }
     } catch (error) {
-        logger.error(`Failed to retrieve ticket by id`, error);
-        throw new Error(`Failed to retrieve ticket by id`)
+        logger.error(`Service: Error retrieving ticket by id / getTicketById()`, { error });
+        throw new Error(`Service: Failed retrieving ticket by id`);
     }
 }
 
@@ -85,8 +85,8 @@ async function getTicketsByStatus(status, role) {
         return returnedTickets.Items;
 
     } catch (error) {
-        logger.error(`Failed retrieving tickets by status: ${status}`, error);
-        throw new Error(`Failed retrieving tickets by status ${status}`);
+        logger.error(`Service: Error retrieving ticket by status / getTicketByStatus()`, { error });
+        throw new Error(`Service: Failed retrieving ticket by status`);
     }
 }
 
@@ -103,8 +103,8 @@ async function getTicketsByEmployeeId(employeeId) {
         return returnedTickets.Items;
 
     } catch (error) {
-        logger.error(`Failed retrieving tickets by employee ID: ${employeeId}`, error);
-        throw new Error(`Failed retrieving tickets by employee ID: ${employeeId}`);
+        logger.error(`Service: Error retrieving tickets by employee id / getTicketByEmployeeId()`, { error });
+        throw new Error(`Service: Failed retrieving ticekts by employee id`);
     }
 }
 
@@ -124,7 +124,7 @@ async function updateTicketStatus(status, ticketId, role) {
         const existingTicket = await ticketDAO.getTicketById(ticketId);
 
         // block checks existingTicket status to make sure they can't update an already processed ticket
-        if (existingTicket.Items[0].status !== "pending") {
+        if (existingTicket.Items.length === 0 || existingTicket.Items[0].status !== "pending") {
             return [];
         }
 
@@ -132,8 +132,8 @@ async function updateTicketStatus(status, ticketId, role) {
         return response.Attributes;
 
     } catch (error) {
-        logger.error(`Failed updating ticket status for ticket ID: ${ticketId}`, error);
-        throw new Error(`Failed updating ticket status for ticket ID: ${ticketId}`);
+        logger.error(`Service: Error updating ticket status / updateTicketStatsu()`, { error });
+        throw new Error(`Service: Failed updating ticket status`);
     }
 
 }
