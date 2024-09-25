@@ -30,11 +30,11 @@ async function registerAccount(req, res) {
                     }
                 });
             } else {
-                return res.status(500).json({ message: "Account creation failed!" });
+                return res.status(500).json({ message: `Account creation failed! Role ${role} not allowed.` });
             }
         } else {
             // employee with username already exists
-            return res.status(409).json({ message: "Employee with username already exists!", username: username });
+            return res.status(409).json({ message: "Failed - Employee with username already exists!", username: username });
         }
     } catch (error) {
         logger.error(`Error in registerAccount() for username: ${req.body.username}`, error)

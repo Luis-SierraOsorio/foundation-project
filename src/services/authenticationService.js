@@ -2,6 +2,7 @@ const employeeDAO = require("../repositories/employeeDAO");
 const { v4: uuidv4 } = require("uuid");
 const { logger } = require("../utils/logger");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 require('dotenv').config({ path: "../.env" });
 
@@ -32,12 +33,20 @@ async function createEmployee(username, password, role) {
      * service layer function to persist employee onto db using DAO layer
     */
 
+    // block checks if role is something else other than manager, employee
+    if (role !== "employee" && role !== "manager") {
+        return null;
+    }
+
+    // hashing password
+    const hashedPassword = bcrypt.hashSync(password, 10);
+
     try {
         // new employee object to be passed into the DAO function call
         let newEmployee = {
             employeeId: uuidv4(),
             username: username,
-            password: password,
+            password: hashedPassword,
             role: role
         };
 
@@ -77,8 +86,8 @@ async function login(username, passwordCheck) {
         // gets password from existing employee in db
         const { password } = returnedEmployee;
 
-        // block compares password passed from controller and password in db, returns [] or JWT
-        if (password !== passwordCheck) {
+        // block compares password passed from controller and password in db using bcrypt, returns [] or JWT
+        if (!bcrypt.compareSync(passwordCheck, password)) {
             return [];
         } else {
             // token creation
@@ -88,7 +97,7 @@ async function login(username, passwordCheck) {
                 employeeId: returnedEmployee.employee_id
             },
                 process.env.MY_SECRET, {
-                expiresIn: '5d'
+                expiresIn: '7d'
             });
 
             return { token };

@@ -116,7 +116,7 @@ async function updateTicketStatus(req, res) {
         if (!updatedTicket) {
             return res.status(401).json({ message: `No ticket found.` });
         } else if (updatedTicket.length === 0) {
-            return res.status(400).json({ message: `Ticket parameters invalid.` });
+            return res.status(400).json({ message: `Can't changed a processed ticket.` });
         }
 
         return res.status(200).json({
