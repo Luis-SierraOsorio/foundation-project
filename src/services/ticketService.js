@@ -142,5 +142,6 @@ module.exports = {
     submitTicket,
     getTicketsByStatus,
     getTicketsByEmployeeId,
-    updateTicketStatus
+    updateTicketStatus,
+    getTicketById
 }
