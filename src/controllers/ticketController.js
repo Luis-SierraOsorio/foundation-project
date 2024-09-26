@@ -9,10 +9,10 @@ async function submitTicket(req, res) {
     try {
         // destructuring required params from JWT attribute and request body
         const { employeeId } = req.user;
-        const { amount, description, status = "pending" } = req.body;
+        const { amount, description } = req.body;
 
         // service layer function call to submit ticket, returns null if ticket fails to submit
-        const createdTicket = await ticketService.submitTicket(employeeId, amount, description, status);
+        const createdTicket = await ticketService.submitTicket(employeeId, amount, description);
 
         // block checks if ticket was submitted properly
         if (!createdTicket) {

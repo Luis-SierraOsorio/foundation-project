@@ -2,7 +2,7 @@ const ticketDAO = require("../repositories/ticketDAO");
 const { v4: uuidv4 } = require('uuid');
 const { logger } = require("../utils/logger");
 
-async function submitTicket(employeeId, amount, description, status) {
+async function submitTicket(employeeId, amount, description) {
     /**
      * service function to submit ticket to db on the DAO layer
      */
@@ -17,7 +17,7 @@ async function submitTicket(employeeId, amount, description, status) {
             employeeId: employeeId,
             amount: amount,
             description: description,
-            status: status
+            status: "pending"
         }
 
         // DAO layer function call to submit ticket
@@ -47,7 +47,7 @@ async function getTicketById(ticketId) {
         const returnedTicket = await ticketDAO.getTicketById(ticketId);
 
         // block checks returnedTicket
-        if (returnedTicket.length === 0) {
+        if (returnedTicket.Items.length === 0) {
             return null;
         } else {
             return returnedTicket.Items[0];
