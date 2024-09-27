@@ -126,7 +126,7 @@ describe("ticketService", () => {
 
     })
     describe("getTicketsByEmployeeId", () => {
-        it('should return tickets for valid employee ID', async () => {
+        test('should return tickets for valid employee ID', async () => {
             // creating mocked objects
             const mockedTickets = [
                 { ticketId: 'ticket-1', employeeId: 'employee-1' },
@@ -144,7 +144,36 @@ describe("ticketService", () => {
 
     })
     describe("updateTicketStatus", () => {
+        test('should return null if role is not manager', async () => {
+            const result = await ticketService.updateTicketStatus('approved', 'ticket-1', 'employee');
 
+            expect(result).toBeNull();
+        });
+
+        test('should return an empty array if ticket is not pending', async () => {
+            // creating a mockedObject
+            const mockedTicket = { ticketId: 'ticket-1', status: 'approved' };
+
+            // mocking DAO layer function
+            ticketDAO.getTicketById.mockResolvedValue({ Items: [mockedTicket] });
+
+            const result = await ticketService.updateTicketStatus('approved', 'ticket-1', 'manager');
+
+            expect(result).toEqual([]);
+        });
+
+        test('should update ticket status when valid inputs are provided', async () => {
+            // creating the mockedTicket objects
+            const mockExistingTicket = { Items: [{ ticketId: 'ticket-1', status: 'pending' }] };
+            const mockUpdatedTicket = { Attributes: { ticketId: 'ticket-1', status: 'approved' } };
+
+            // mocking the DAO layer function call and returns
+            ticketDAO.getTicketById.mockResolvedValue(mockExistingTicket);
+            ticketDAO.updateTicketStatus.mockResolvedValue(mockUpdatedTicket);
+
+            const result = await ticketService.updateTicketStatus('approved', 'ticket-1', 'manager');
+
+            expect(result).toEqual(mockUpdatedTicket.Attributes);
+        });
     })
-
 })

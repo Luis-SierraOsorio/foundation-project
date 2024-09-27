@@ -123,8 +123,14 @@ async function updateTicketStatus(status, ticketId, role) {
         // DAO function call, returns null - no ticket, {..., Items: [...{<data>}]}
         const existingTicket = await ticketDAO.getTicketById(ticketId);
 
+        // ticket not found
+        if (existingTicket.Items.length === 0) {
+            return {};
+        }
+
         // block checks existingTicket status to make sure they can't update an already processed ticket
-        if (existingTicket.Items.length === 0 || existingTicket.Items[0].status !== "pending") {
+        if (existingTicket.Items[0].status !== "pending") {
+            console.log("RETURNING");
             return [];
         }
 
