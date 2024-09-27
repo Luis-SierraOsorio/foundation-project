@@ -108,15 +108,22 @@ async function getTicketsByEmployeeId(employeeId) {
     }
 }
 
-async function updateTicketStatus(status, ticketId, role) {
+async function updateTicketStatus(status, ticketId, role, username) {
     /**
      * service layer function to handle the updating of a ticket status
      */
 
     try {
 
-        // 
-        if (!status || !ticketId || role !== 'manager') {
+        // set to hold possible statuses
+        const statuses = new Set(["pending", "approved", "denied"]);
+
+        // string sanitization
+        status = status.toLowerCase().trim();
+
+
+        // checking params
+        if (!status || !ticketId || role !== 'manager' || !statuses.has(status)) {
             return null;
         }
 
@@ -130,11 +137,10 @@ async function updateTicketStatus(status, ticketId, role) {
 
         // block checks existingTicket status to make sure they can't update an already processed ticket
         if (existingTicket.Items[0].status !== "pending") {
-            console.log("RETURNING");
             return [];
         }
 
-        const response = await ticketDAO.updateTicketStatus(status, ticketId);
+        const response = await ticketDAO.updateTicketStatus(status, ticketId, username);
         return response.Attributes;
 
     } catch (error) {

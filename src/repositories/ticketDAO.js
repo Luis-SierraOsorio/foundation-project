@@ -105,7 +105,7 @@ async function getTicketsByEmployeeId(employeeId) {
     }
 }
 
-async function updateTicketStatus(status, ticketId) {
+async function updateTicketStatus(status, ticketId, username) {
     /**
      * DAO layer function to update given ticket status
      */
@@ -115,12 +115,14 @@ async function updateTicketStatus(status, ticketId) {
         const params = {
             TableName: process.env.TABLE_NAME_TICKET,
             Key: { ticket_id: ticketId },
-            UpdateExpression: "set #status = :status",
+            UpdateExpression: "set #status = :status, #approvedBy = :approvedBy",
             ExpressionAttributeNames: {
-                "#status": "status"
+                "#status": "status",
+                "#approvedBy": "approvedBy"
             },
             ExpressionAttributeValues: {
-                ":status": status
+                ":status": status,
+                ":approvedBy": username
             },
             ReturnValues: "ALL_NEW"
 

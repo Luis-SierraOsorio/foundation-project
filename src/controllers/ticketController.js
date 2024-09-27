@@ -23,7 +23,8 @@ async function submitTicket(req, res) {
                 ticket: {
                     ticketId: createdTicket.ticket_id,
                     amount: createdTicket.amount,
-                    description: createdTicket.description
+                    description: createdTicket.description,
+                    status: createdTicket.status
                 }
             });
         }
@@ -107,10 +108,10 @@ async function updateTicketStatus(req, res) {
         // destructuring the required params
         const { status } = req.body;
         const { ticketId } = req.params;
-        const { role } = req.user;
+        const { role, username } = req.user;
 
         // service layer function, returns null, []- no updating ,{...} - containing the ticket
-        const updatedTicket = await ticketService.updateTicketStatus(status, ticketId, role);
+        const updatedTicket = await ticketService.updateTicketStatus(status, ticketId, role, username);
 
         // block checks updateTicket
         if (!updatedTicket) {
