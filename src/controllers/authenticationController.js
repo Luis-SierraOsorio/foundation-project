@@ -30,7 +30,7 @@ async function registerAccount(req, res) {
                     }
                 });
             } else {
-                return res.status(500).json({ message: `Account creation failed! Role ${role} not allowed.` });
+                return res.status(400).json({ message: `Account creation failed! Role ${role} not allowed.` });
             }
         } else {
             // employee with username already exists
@@ -59,7 +59,7 @@ async function login(req, res) {
         // block checks returnedEmployee, returns null if acc doesn't exists, [] if creds don't match, JWT if successful
         if (!returnedEmployee) {
             // account does not exist
-            return res.status(404).json({ message: `Account doesn't exist.` });
+            return res.status(403).json({ message: `Account doesn't exist.` });
         } else if (returnedEmployee.length === 0) {
             // incorrect password
             return res.status(401).json({ message: `Username and/or password do not match.` });

@@ -115,7 +115,7 @@ async function updateTicketStatus(req, res) {
 
         // block checks updateTicket
         if (!updatedTicket) {
-            return res.status(401).json({ message: `Sorry something went wrong.` });
+            return res.status(400).json({ message: `Sorry something went wrong.` });
         } else if (updatedTicket && typeof updatedTicket === 'object' && !Array.isArray(updatedTicket) && Object.keys(updatedTicket).length === 0) {
             return res.status(404).json({ message: `Sorry, no ticket found with this id.` });
         } else if (Array.isArray(updatedTicket) && updatedTicket.length === 0) {

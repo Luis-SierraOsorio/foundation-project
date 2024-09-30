@@ -33,6 +33,10 @@ async function createEmployee(username, password, role) {
      * service layer function to persist employee onto db using DAO layer
     */
 
+    // sanitizing inputs
+    username = username.trim().replace(/\s+/g, '');
+    password = password.trim().replace(/\s+/g, '');
+
     // block checks if role is something else other than manager, employee
     if (role !== "employee" && role !== "manager") {
         return null;
